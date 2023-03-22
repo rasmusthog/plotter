@@ -104,6 +104,7 @@ def adjust_plot(fig, ax, options):
         'xlim': None, 'ylim': None, # Limits to the x- and y-axes
         'xlim_reset': False, 'ylim_reset': False, # For use in setting limits of backgrounds - forcing reset of xlim and ylim, useful when more axes
         'title': None, # Title of the plot
+        'colours': None, 'palettes': None,
         'backgrounds': [],
         'legend': False, 'legend_position': ['lower center', (0.5, -0.1)], 'legend_ncol': 1, # Toggles on/off legend. Specifices legend position and the number of columns the legend should appear as.
         'subplots_adjust': {'left': None, 'right': None, 'top': None, 'bottom': None, 'wspace': None, 'hspace': None}, # Adjustment of the Axes-object within the Figure-object. Fraction of the Figure-object the left, bottom, right and top edges of the Axes-object will start.
