@@ -92,7 +92,7 @@ def adjust_plot(fig, ax, options):
 
     default_options = {
         'plot_kind': None, # defaults to None, but should be utilised when requiring special formatting for a particular plot 
-        'xlabel': None, 'ylabel': None,
+        'xlabel': None, 'ylabel': None, 'ylabel_pos': 'left',
         'xunit': None, 'yunit': None,
         'xlabel_pad': 4.0, 'ylabel_pad': 4.0, 
         'hide_x_labels': False, 'hide_y_labels': False, # Whether the main labels on the x- and/or y-axes should be hidden
@@ -108,8 +108,10 @@ def adjust_plot(fig, ax, options):
         'backgrounds': [],
         'legend': False, 'legend_position': ['lower center', (0.5, -0.1)], 'legend_ncol': 1, # Toggles on/off legend. Specifices legend position and the number of columns the legend should appear as.
         'subplots_adjust': {'left': None, 'right': None, 'top': None, 'bottom': None, 'wspace': None, 'hspace': None}, # Adjustment of the Axes-object within the Figure-object. Fraction of the Figure-object the left, bottom, right and top edges of the Axes-object will start.
+        'x_tick_params': {'direction': 'in', 'which': 'both', 'top': True, 'bottom': True},
+        'y_tick_params': {'direction': 'in', 'which': 'both', 'left': True, 'right': True},
         'marker_edges': None,
-        'text': None # Text to show in the plot. Should be a list where the first element is the string, and the second is a tuple with x- and y-coordinates. Could also be a list of lists to show more strings of text.
+        'text': None, # Text to show in the plot. Should be a list where the first element is the string, and the second is a tuple with x- and y-coordinates. Could also be a list of lists to show more strings of text.
     }
 
 
@@ -121,6 +123,10 @@ def adjust_plot(fig, ax, options):
             ax.set_ylabel(f'{options["ylabel"]}', labelpad=options['ylabel_pad']) 
         else:
             ax.set_ylabel(f'{options["ylabel"]} [{options["yunit"]}]', labelpad=options['ylabel_pad'])
+
+        #if options['ylabel_pos'] == 'right':
+            #ax.yaxis.set_label_position('right')
+            #ax.yaxis.tick_right()
             
     else:
         ax.set_ylabel('')
@@ -169,12 +175,12 @@ def adjust_plot(fig, ax, options):
     if options['hide_y_ticks']:
         ax.tick_params(axis='y', direction='in', which='both', left=False, right=False)
     else:
-        ax.tick_params(axis='y', direction='in', which='both', left=True, right=True)
+        ax.tick_params(axis='y', direction=options['y_tick_params']['direction'], which=options['y_tick_params']['which'], left=options['y_tick_params']['left'], right=options['y_tick_params']['right'])
 
     if options['hide_x_ticks']:
         ax.tick_params(axis='x', direction='in', which='both', bottom=False, top=False)
     else:
-        ax.tick_params(axis='x', direction='in', which='both', bottom=True, top=True)
+        ax.tick_params(axis='x', direction=options['x_tick_params']['direction'], which=options['x_tick_params']['which'], top=options['x_tick_params']['top'], bottom=options['x_tick_params']['bottom'])
 
 
           
